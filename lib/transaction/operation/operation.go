@@ -5,11 +5,11 @@
 package operation
 
 import (
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/operation"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositoryOperation repository.Repository

@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/recipient"
+	"net/url"
+	"os"
 )
 
 var payableRecord recipient.Recipient
@@ -24,10 +24,9 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	getall, err, errorsApi := payableRecord.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

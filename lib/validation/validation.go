@@ -5,8 +5,8 @@
 package validation
 
 import (
-	"net/url"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"net/url"
 )
 
 // Check the values the map passed
@@ -19,7 +19,7 @@ func MustBeNotEmpty(values url.Values, require func() []string) (bool, error) {
 		for k, v2 := range values {
 			if k == v {
 				if len(v2[0]) == 0 {
-					return false, &liberr.Err{Name:"Parametros invalidos"}
+					return false, &liberr.Err{Name: "Parametros invalidos"}
 				}
 				valid[k1] = k
 			}
@@ -27,7 +27,7 @@ func MustBeNotEmpty(values url.Values, require func() []string) (bool, error) {
 	}
 
 	if len(valid) != len(required) {
-		return false, &liberr.Err{Name:"Parametros invalidos"}
+		return false, &liberr.Err{Name: "Parametros invalidos"}
 	}
 
 	return true, nil

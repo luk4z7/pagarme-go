@@ -5,11 +5,11 @@
 package card
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryCard repository.Repository
@@ -27,7 +27,7 @@ type Card struct {
 	Fingerprint string    `json:"fingerprint"`  // Identificador do cartão na nossa base
 	FirstDigits string    `json:"first_digits"` // Primeiros digitos do cartão
 	HolderName  string    `json:"holder_name"`  // Nome do portador do cartão
-	Id	    string    `json:"id"`           // Id do cartão
+	Id          string    `json:"id"`           // Id do cartão
 	LastDigits  string    `json:"last_digits"`  // Últimos digitos do cartão
 	Object      string    `json:"object"`       // Nome do tipo do objeto criado/modificado.
 	Valid       bool      `json:"valid"`        // Indicador de cartão válido

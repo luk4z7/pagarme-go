@@ -5,11 +5,11 @@
 package payable
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryRecipient repository.Repository
@@ -28,7 +28,7 @@ type Payable struct {
 	TransactionId int       `json:"transaction_id"`
 	SplitRuleId   string    `json:"split_rule_id"`
 	PaymentDate   time.Time `json:"payment_date"`
-	Type 	      string 	`json:"type"`
+	Type          string    `json:"type"`
 	PaymentMethod string    `json:"payment_method"`
 	DateCreated   time.Time `json:"date_created"`
 }

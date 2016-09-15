@@ -6,10 +6,10 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/antifraudanalysis"
+	"net/url"
+	"os"
 )
 
 var transactionAntifraudAnalysis antifraudanalysis.AntifraudAnalysis
@@ -17,7 +17,7 @@ var transactionAntifraudAnalysis antifraudanalysis.AntifraudAnalysis
 func main() {
 	get, err, errorsApi := transactionAntifraudAnalysis.Get(url.Values{
 		"transaction_id": {"314578"},
-		"id": {"189164"},
+		"id":             {"189164"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -26,7 +26,6 @@ func main() {
 		responseGet, _ := json.MarshalIndent(get, "", " ")
 		os.Stdout.Write(responseGet)
 	}
-
 
 	getall, err, errorsApi := transactionAntifraudAnalysis.GetAll(url.Values{"transaction_id": {"314578"}}, auth.Headers{})
 	if err != nil {

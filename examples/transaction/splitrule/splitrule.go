@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/splitrule"
+	"net/url"
+	"os"
 )
 
 var splitruleRecord splitrule.SplitRule
@@ -17,7 +17,7 @@ var splitruleRecord splitrule.SplitRule
 func main() {
 	get, err, errorsApi := splitruleRecord.Get(url.Values{
 		"transaction_id": {"0808"},
-		"id": {"184"},
+		"id":             {"184"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -26,7 +26,6 @@ func main() {
 		responseGet, _ := json.MarshalIndent(get, "", " ")
 		os.Stdout.Write(responseGet)
 	}
-
 
 	getall, err, errorsApi := splitruleRecord.GetAll(url.Values{"transaction_id": {"0808"}}, auth.Headers{})
 	if err != nil {

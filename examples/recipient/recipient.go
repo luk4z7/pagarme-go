@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/recipient"
+	"net/url"
+	"os"
 )
 
 var recipientRecord recipient.Recipient
@@ -31,7 +31,6 @@ func main() {
 		os.Stdout.Write(responseCreate)
 	}
 
-
 	// Criando um recebedor com antecipação automática
 	data2 := []byte(`{
 		"transfer_interval":"monthly",
@@ -49,7 +48,6 @@ func main() {
 		responseCreate2, _ := json.MarshalIndent(create2, "", " ")
 		os.Stdout.Write(responseCreate2)
 	}
-
 
 	// Criando um recebedor com uma conta bancária nova
 	data3 := []byte(`{
@@ -74,7 +72,6 @@ func main() {
 		os.Stdout.Write(responseCreate3)
 	}
 
-
 	// Retornando o saldo de um recebedor
 	get, err, errorsApi := recipientRecord.Get(url.Values{"id": {"re_cishgtigt012zv86e859ajse4"}}, auth.Headers{})
 	if err != nil {
@@ -85,10 +82,9 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	getall, err, errorsApi := recipientRecord.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -98,12 +94,11 @@ func main() {
 		os.Stdout.Write(responseGetAll)
 	}
 
-
 	// Atualizando um recebedor com uma outra conta bancária existente
 	data4 := []byte(`{
 		"bank_account_id": 6626431
 	}`)
-	update, err, errorsApi := recipientRecord.Update(data4, url.Values{"id" : {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
+	update, err, errorsApi := recipientRecord.Update(data4, url.Values{"id": {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
 		os.Stdout.Write(response)
@@ -112,13 +107,12 @@ func main() {
 		os.Stdout.Write(responseUpdate)
 	}
 
-
 	// Atualizando um recebedor para usar antecipação automática
 	data5 := []byte(`{
 		"automatic_anticipation_enabled": true,
 		"anticipatable_volume_percentage": 40
 	}`)
-	update2, err, errorsApi := recipientRecord.Update(data5, url.Values{"id" : {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
+	update2, err, errorsApi := recipientRecord.Update(data5, url.Values{"id": {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
 		os.Stdout.Write(response)
@@ -127,13 +121,12 @@ func main() {
 		os.Stdout.Write(responseUpdate2)
 	}
 
-
 	// Atualizando um recebedor com novo dia para transferência
 	data6 := []byte(`{
 		"transfer_day": 5,
 		"transfer_interval": "weekly"
 	}`)
-	update3, err, errorsApi := recipientRecord.Update(data6, url.Values{"id" : {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
+	update3, err, errorsApi := recipientRecord.Update(data6, url.Values{"id": {"re_ciflm3dq9008r116ds3o8afvt"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
 		os.Stdout.Write(response)

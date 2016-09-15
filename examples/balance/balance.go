@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/balance"
+	"net/url"
+	"os"
 )
 
 var balanceAmount balance.BalanceAmount

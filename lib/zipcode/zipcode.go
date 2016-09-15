@@ -5,10 +5,10 @@
 package zipcode
 
 import (
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositoryZipcode repository.Repository

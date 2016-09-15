@@ -5,12 +5,12 @@
 package transfer
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
-	"github.com/luk4z7/pagarme-go/lib/bank"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/lib/bank"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryTransfer repository.Repository
@@ -19,37 +19,39 @@ const (
 	endPoint = "https://api.pagar.me/1/transfers"
 )
 
+// object                 Nome do tipo do objeto criado/modificado
+// id                     Id da transferência
+// amount                 Valor em centavos transferido
+// type                   Tipo de transferência. Valores possíveis: ted, doc e credito_em_conta
+// status                 Estado da transferência. Valores possíveis: pending_transfer, transferred, failed, processing
+// 			  e canceled
+//
+// source_type            O tipo de origem da qual irá ser transferido o valor
+// source_id              O id da origem da transferencia
+// target_type            O tipo de destino da transferencia
+// target_id              O id do destino da transferencia
+// fee                    Taxa em centavos cobrada pela transferência
+// funding_date           Data ocorrência da transferência no formato ISODate
+// funding_estimated_date Data estimada para efetivação da transferência no formato ISODate
+// transaction_id         Id da transação estornada no caso de estorno de boleto
+// date_created           Data de criação da transferência no formato ISODate
+// bank_account           Objeto da conta bancária
 type Transfer struct {
-	Object               string       `json:"object"`                 // Nome do tipo do objeto criado/modificado
-	Id                   int          `json:"id"`                     // Id da transferência
-	Amount               int          `json:"amount"`                 // Valor em centavos transferido
-	Type                 string       `json:"type"`                   // Tipo de transferência. Valores possíveis:
-									  // ted, doc e credito_em_conta
-
-	Status               string       `json:"status"`                 // Estado da transferência. Valores possíveis:
-									  // pending_transfer, transferred, failed,
-				                                          //  processing e  canceled
-
-	SourceType           string       `json:"source_type"`            // O tipo de origem da qual irá ser transferido
-									  // o valor
-
-	SourceId             string       `json:"source_id"`              // O id da origem da transferencia
-	TargetType           string       `json:"target_type"`            // O tipo de destino da transferencia
-	TargetId             string       `json:"target_id"`              // O id do destino da transferencia
-	Fee                  int          `json:"fee"`                    // Taxa em centavos cobrada pela transferência
-	FundingDate          time.Time    `json:"funding_date"`           // Data ocorrência da transferência no formato
-									  // ISODate
-
-	FundingEstimatedDate time.Time    `json:"funding_estimated_date"` // Data estimada para efetivação da transferência
-									  // no formato ISODate
-
-	TransactionId        int          `json:"transaction_id"`         // Id da transação estornada no caso de estorno
-									  // de boleto
-
-	DateCreated          time.Time    `json:"date_created"`           // Data de criação da transferência no formato
-									  // ISODate
-
-	BankAccount          bank.Account `json:"bank_account"`           // Objeto da conta bancária
+	Object               string       `json:"object"`
+	Id                   int          `json:"id"`
+	Amount               int          `json:"amount"`
+	Type                 string       `json:"type"`
+	Status               string       `json:"status"`
+	SourceType           string       `json:"source_type"`
+	SourceId             string       `json:"source_id"`
+	TargetType           string       `json:"target_type"`
+	TargetId             string       `json:"target_id"`
+	Fee                  int          `json:"fee"`
+	FundingDate          time.Time    `json:"funding_date"`
+	FundingEstimatedDate time.Time    `json:"funding_estimated_date"`
+	TransactionId        int          `json:"transaction_id"`
+	DateCreated          time.Time    `json:"date_created"`
+	BankAccount          bank.Account `json:"bank_account"`
 }
 
 func (s *Transfer) Create(d []byte, p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {

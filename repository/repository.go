@@ -5,14 +5,14 @@
 package repository
 
 import (
-	"net/url"
-	"io/ioutil"
-	"net/http"
 	"bytes"
 	"encoding/json"
-	"github.com/luk4z7/pagarme-go/config"
 	"github.com/luk4z7/pagarme-go/auth"
+	"github.com/luk4z7/pagarme-go/config"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 var key config.ApiKey
@@ -22,7 +22,6 @@ var errApi = liberr.ErrorsAPI{}
 // Repository is a object type for abstract methods for API
 // Get, Create, Getall, etc ...
 type Repository struct {
-
 }
 
 // params expected data for route settings and access should be as follows:
@@ -75,7 +74,7 @@ func request(m, p string, d []byte, i interface{}) (interface{}, error, liberr.E
 	// Format the header
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Add("Authorization", "Basic " + auth.BasicAuth(key.GetApiKey(), "x"))
+	req.Header.Add("Authorization", "Basic "+auth.BasicAuth(key.GetApiKey(), "x"))
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
@@ -103,7 +102,7 @@ func checkError(d []byte) (error, liberr.ErrorsAPI) {
 	liberr.Check(err, "Cannot unmarshal data - method: checkError")
 
 	if len(errApi.Errors) == 1 {
-		return &liberr.Err{Name:"errosapi"}, errApi
+		return &liberr.Err{Name: "errosapi"}, errApi
 	}
 	return nil, errApi
 }

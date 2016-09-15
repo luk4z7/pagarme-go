@@ -5,10 +5,10 @@
 package search
 
 import (
-	"net/url"
-	"github.com/luk4z7/pagarme-go/repository"
 	"github.com/luk4z7/pagarme-go/auth"
-	liberr " github.com/luk4z7/pagarme-go/error"
+	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositorySearch repository.Repository
@@ -37,10 +37,10 @@ type Hits struct {
 }
 
 type HitsInto struct {
-	Index  string `json:"_index"`
-	Type   string `json:"_type"`
-	Id     string `json:"_id"`
-	Score  string `json:"_score"`
+	Index  string      `json:"_index"`
+	Type   string      `json:"_type"`
+	Id     string      `json:"_id"`
+	Score  string      `json:"_score"`
 	Source interface{} `json:"_source"`
 }
 

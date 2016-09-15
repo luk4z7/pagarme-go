@@ -6,10 +6,10 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/event"
+	"net/url"
+	"os"
 )
 
 var transactionEvent event.TransactionEvent

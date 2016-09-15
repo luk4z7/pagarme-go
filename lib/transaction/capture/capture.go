@@ -5,11 +5,11 @@
 package capture
 
 import (
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/transaction"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositoryCapture repository.Repository

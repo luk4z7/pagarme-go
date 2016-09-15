@@ -6,9 +6,9 @@ package auth
 
 import (
 	"encoding/base64"
-	"net/http"
 	"github.com/luk4z7/pagarme-go/config"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"net/http"
 )
 
 var key config.ApiKey
@@ -35,7 +35,7 @@ func Init(uri string, h Headers) *http.Response {
 		req.URL.RawQuery = q.Encode()
 	}
 	// Authentication using basic http
-	req.Header.Add("Authorization", "Basic " + BasicAuth(key.GetApiKey(), "x") )
+	req.Header.Add("Authorization", "Basic "+BasicAuth(key.GetApiKey(), "x"))
 	cli := &http.Client{}
 	resp, err := cli.Do(req)
 	liberr.Check(err, "Return error HTTP response of Do - method: Init")

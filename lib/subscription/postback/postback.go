@@ -5,11 +5,11 @@
 package subscription
 
 import (
-	"net/url"
-	"github.com/luk4z7/pagarme-go/repository"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/postback"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/lib/postback"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositoryPostback repository.Repository
@@ -40,4 +40,3 @@ func (s *SubscriptionPostback) Redeliver(p url.Values, h auth.Headers) (postback
 	_, err, errApi := repositoryPostback.Create(url.Values{"route": {route}}, []byte(`{}`), s)
 	return s.postback, err, errApi
 }
-

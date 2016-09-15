@@ -5,13 +5,13 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/subscription"
-	subscriptionTransaction "github.com/luk4z7/pagarme-go/lib/subscription/transaction"
 	subscriptionEvent "github.com/luk4z7/pagarme-go/lib/subscription/event"
+	subscriptionTransaction "github.com/luk4z7/pagarme-go/lib/subscription/transaction"
+	"net/url"
+	"os"
 )
 
 var subscriptionRecord subscription.Subscription
@@ -40,7 +40,6 @@ func main() {
 		os.Stdout.Write(responseCreate)
 	}
 
-
 	// Retornando uma assinatura
 	get, err, errorsApi := subscriptionRecord.Get(url.Values{"id": {"99815"}}, auth.Headers{})
 	if err != nil {
@@ -51,11 +50,10 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	// Retornando todas as assinaturas
 	getall, err, errorsApi := subscriptionRecord.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -65,13 +63,12 @@ func main() {
 		os.Stdout.Write(responseGetAll)
 	}
 
-
 	// Atualizando um recebedor com uma outra conta bancária existente
 	data4 := []byte(`{
 		"plan_id": "62544",
 		"card_id": "card_cisp3at4s00fowm6egw1kgit1"
 	}`)
-	update, err, errorsApi := subscriptionRecord.Update(data4, url.Values{"id" : {"99815"}}, auth.Headers{})
+	update, err, errorsApi := subscriptionRecord.Update(data4, url.Values{"id": {"99815"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
 		os.Stdout.Write(response)
@@ -79,7 +76,6 @@ func main() {
 		responseUpdate, _ := json.MarshalIndent(update, "", "   ")
 		os.Stdout.Write(responseUpdate)
 	}
-
 
 	// Cancelando uma assinatura
 	cancel, err, errorsApi := subscriptionRecord.Cancel(url.Values{
@@ -93,7 +89,6 @@ func main() {
 		os.Stdout.Write(responseCancel)
 	}
 
-
 	// Transações de uma assinatura
 	getTransactions, err, errorsApi := subscriptionTransactions.Get(url.Values{
 		"id": {"99815"},
@@ -106,11 +101,10 @@ func main() {
 		os.Stdout.Write(responseTransactions)
 	}
 
-
 	// Retornar um evento de uma assinatura
 	getEvent, err, errorsApi := subscriptionEvents.Get(url.Values{
 		"subscription_id": {"99815"},
-		"id": {"99815"},
+		"id":              {"99815"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -119,7 +113,6 @@ func main() {
 		responseGetEvent, _ := json.MarshalIndent(getEvent, "", " ")
 		os.Stdout.Write(responseGetEvent)
 	}
-
 
 	// Retornar todos os eventos de uma assinatura
 	getallEvents, err, errorsApi := subscriptionEvents.GetAll(url.Values{

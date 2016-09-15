@@ -5,11 +5,11 @@
 package plan
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryRecipient repository.Repository
@@ -18,24 +18,27 @@ const (
 	endPoint = "https://api.pagar.me/1/plans"
 )
 
+// object           Nome do tipo do objeto criado/modificado
+// id               Id do plano
+// amount           Valor do plano em centavos
+// days             Dias para efetuação da próxima cobrança da assinatura atrelada ao plano
+// name             Nome do plano
+// trial_days       Dias que o usuário poderá testar o serviço gratuitamente
+// date_created     Data da criação do plano (ISODate)
+// payment_methods  Formas de pagamento aceitas no plano
+// charges          Número de cobranças que podem ser feitas em uma assinatura
+// installments     Informa em quantas vezes o pagamento será parcelado entre cada cobrança
 type Plan struct {
-	Object         string            `json:"object"`          // Nome do tipo do objeto criado/modificado
-	Id             int               `json:"id"`              // Id do plano
-	Amount         int               `json:"amount"`          // Valor do plano em centavos
-	Days           int               `json:"days"`            // Dias para efetuação da próxima cobrança da
-								  // assinatura atrelada ao plano
-
-	Name 	       string            `json:"name"`            // Nome do plano
-	TrialDays      int               `json:"trial_days"`      // Dias que o usuário poderá testar o serviço
-	                                                          // gratuitamente
-
-	DateCreated    time.Time         `json:"date_created"`    // Data da criação do plano (ISODate)
-	PaymentMethods interface{}       `json:"payment_methods"` // Formas de pagamento aceitas no plano
-	Charges        int               `json:"charges"`         // Número de cobranças que podem ser feitas em uma
-						                  // assinatura
-
-	Installments   int               `json:"installments"`    // Informa em quantas vezes o pagamento será parcelado
-						                  // entre cada cobrança
+	Object         string      `json:"object"`
+	Id             int         `json:"id"`
+	Amount         int         `json:"amount"`
+	Days           int         `json:"days"`
+	Name           string      `json:"name"`
+	TrialDays      int         `json:"trial_days"`
+	DateCreated    time.Time   `json:"date_created"`
+	PaymentMethods interface{} `json:"payment_methods"`
+	Charges        int         `json:"charges"`
+	Installments   int         `json:"installments"`
 }
 
 func (s *Plan) Create(d []byte, p url.Values, headers auth.Headers) (Plan, error, liberr.ErrorsAPI) {

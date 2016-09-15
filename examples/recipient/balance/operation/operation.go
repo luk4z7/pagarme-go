@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/recipient/balance/operation"
+	"net/url"
+	"os"
 )
 
 var balanceRecipient operation.OperationRecipient
@@ -28,12 +28,11 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	getAll, err, errorsApi := balanceRecipient.GetAll(url.Values{
 		"id_recipient": {"re_ciflm3dq9008r116ds3o8afvt"},
 	}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

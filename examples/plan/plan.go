@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/plan"
+	"net/url"
+	"os"
 )
 
 var planRecord plan.Plan
@@ -34,7 +34,6 @@ func main() {
 		os.Stdout.Write(responseCreate)
 	}
 
-
 	// Criando um plano anual válido por 3 anos com boleto
 	data2 := []byte(`{
 		"amount":"8000",
@@ -54,7 +53,6 @@ func main() {
 		responseCreate2, _ := json.MarshalIndent(create2, "", " ")
 		os.Stdout.Write(responseCreate2)
 	}
-
 
 	// Criando um plano anual parcelado válido por 3 anos com boleto
 	data3 := []byte(`{
@@ -76,7 +74,6 @@ func main() {
 		os.Stdout.Write(responseCreate3)
 	}
 
-
 	get, err, errorsApi := planRecord.Get(url.Values{"id": {"62535"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -86,10 +83,9 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	getall, err, errorsApi := planRecord.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -99,13 +95,12 @@ func main() {
 		os.Stdout.Write(responseGetAll)
 	}
 
-
 	// Atualizando um plano
 	data4 := []byte(`{
 		"name": "Plano de Teste de Teste",
 		"trial_days": "8"
 	}`)
-	update, err, errorsApi := planRecord.Update(data4, url.Values{"id" : {"40648"}}, auth.Headers{})
+	update, err, errorsApi := planRecord.Update(data4, url.Values{"id": {"40648"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
 		os.Stdout.Write(response)

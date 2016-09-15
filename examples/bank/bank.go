@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/bank"
+	"net/url"
+	"os"
 )
 
 var bankAccount bank.Account
@@ -33,7 +33,6 @@ func main() {
 	responseCreate, _ := json.MarshalIndent(create, "", " ")
 	os.Stdout.Write(responseCreate)
 
-
 	// Get a Card
 	get, err, errorsApi := bankAccount.Get(url.Values{"id": {"15897336"}}, auth.Headers{})
 	if err != nil {
@@ -43,11 +42,10 @@ func main() {
 	responseGet, _ := json.MarshalIndent(get, "", " ")
 	os.Stdout.Write(responseGet)
 
-
 	// Get a Balance Operation
 	getall, err, errorsApi := bankAccount.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

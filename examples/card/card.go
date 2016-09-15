@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/card"
+	"net/url"
+	"os"
 )
 
 var creditCard card.Card
@@ -29,7 +29,6 @@ func main() {
 		os.Stdout.Write(responseCreate)
 	}
 
-
 	// Create a Card
 	data2 := []byte(`{
 		"card_number": "4242424242424242",
@@ -44,7 +43,6 @@ func main() {
 		responseCreate2, _ := json.MarshalIndent(create2, "", " ")
 		os.Stdout.Write(responseCreate2)
 	}
-
 
 	// Get a Card
 

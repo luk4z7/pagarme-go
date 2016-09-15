@@ -5,11 +5,11 @@
 package customer
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryCustomer repository.Repository
@@ -33,24 +33,24 @@ type Customer struct {
 }
 
 type Addresses struct {
-	City 	      string `json:"city"`		    // Nome do objeto criado
-	Complementary string `json:"complementary"`         // Complemento do endereço do Customere
-	Country       string `json:"country"`               // País do endereço do Customere
-	Id            int    `json:"id"`                    // Id do endereço
-	Neighborhood  string `json:"neighborhood"`          // Bairro do Customere
-	Object        string `json:"object"`                // Nome do objeto criado
-	State         string `json:"state"`		    // Estado do endereço do Customere
-	Street        string `json:"street"`                // Logradouro do Customere
-	StreetNumber  string `json:"street_number"`         // Numero do endereço do Customere
-	Zipcode       string `json:"zipcode"`               // CEP do Customere
+	City          string `json:"city"`          // Nome do objeto criado
+	Complementary string `json:"complementary"` // Complemento do endereço do Customere
+	Country       string `json:"country"`       // País do endereço do Customere
+	Id            int    `json:"id"`            // Id do endereço
+	Neighborhood  string `json:"neighborhood"`  // Bairro do Customere
+	Object        string `json:"object"`        // Nome do objeto criado
+	State         string `json:"state"`         // Estado do endereço do Customere
+	Street        string `json:"street"`        // Logradouro do Customere
+	StreetNumber  string `json:"street_number"` // Numero do endereço do Customere
+	Zipcode       string `json:"zipcode"`       // CEP do Customere
 }
 
 type Phones struct {
-	DDD    string `json:"ddd"`			    // Numero do DDD do telefone
-	DDI    string `json:"ddi"`                          // Número do DDI do telefone
-	Id     int     `json:"id"`			    // Id gerado pelo sistema para o telefone criado
-	Number string `json:"number"`			    // Numero do telefone do Customere
-	Object string `json:"object"`                       // Nome do objeto criado
+	DDD    string `json:"ddd"`    // Numero do DDD do telefone
+	DDI    string `json:"ddi"`    // Número do DDI do telefone
+	Id     int    `json:"id"`     // Id gerado pelo sistema para o telefone criado
+	Number string `json:"number"` // Numero do telefone do Customere
+	Object string `json:"object"` // Nome do objeto criado
 }
 
 func (s *Customer) Create(d []byte, p url.Values, h auth.Headers) (Customer, error, liberr.ErrorsAPI) {

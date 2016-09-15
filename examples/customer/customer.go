@@ -5,11 +5,11 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/customer"
+	"net/url"
+	"os"
 )
 
 var customerRecord customer.Customer
@@ -46,7 +46,6 @@ func main() {
 		os.Stdout.Write(responseCreate)
 	}
 
-
 	get, err, errorsApi := customerRecord.Get(url.Values{"id": {"90456"}}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -56,10 +55,9 @@ func main() {
 		os.Stdout.Write(responseGet)
 	}
 
-
 	getall, err, errorsApi := customerRecord.GetAll(url.Values{}, auth.Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

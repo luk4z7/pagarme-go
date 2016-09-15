@@ -12,7 +12,7 @@ type ErrorsAPI struct {
 
 type Errors struct {
 	ParameterName string `json:"parameter_name"`
-	Type 	      string `json:"type"`
+	Type          string `json:"type"`
 	Message       string `json:"message"`
 }
 
@@ -34,4 +34,3 @@ func Check(e error, m string) {
 		}
 	}
 }
-

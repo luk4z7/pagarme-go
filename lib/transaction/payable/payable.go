@@ -5,11 +5,11 @@
 package payable
 
 import (
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/repository"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/payable"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositoryPayable repository.Repository

@@ -5,19 +5,19 @@
 package main
 
 import (
-	"net/url"
 	"encoding/json"
-	"os"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/search"
+	"net/url"
+	"os"
 )
 
 var searchRecord search.Search
 
 func main() {
 	get, err, errorsApi := searchRecord.Get(url.Values{}, auth.Headers{
-		"type"  : "transaction",
-		"query" : `{
+		"type": "transaction",
+		"query": `{
 			  "query": {
 			    "filtered": {
 			      "query": {"match_all": {}},

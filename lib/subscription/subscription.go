@@ -5,15 +5,15 @@
 package subscription
 
 import (
-	"net/url"
-	"time"
-	"github.com/luk4z7/pagarme-go/lib/plan"
-	"github.com/luk4z7/pagarme-go/lib/transaction"
-	"github.com/luk4z7/pagarme-go/lib/customer"
-	"github.com/luk4z7/pagarme-go/lib/card"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/lib/card"
+	"github.com/luk4z7/pagarme-go/lib/customer"
+	"github.com/luk4z7/pagarme-go/lib/plan"
+	"github.com/luk4z7/pagarme-go/lib/transaction"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositorySubscription repository.Repository
@@ -22,48 +22,48 @@ const (
 	endPoint = "https://api.pagar.me/1/subscriptions"
 )
 
+// object               Nome do tipo de objeto criado ou modificado. Valor retornado: subscription
+// plan                 Objeto com os dados do plano que a assinatura está associada
+// id                   Número do identificador do plano
+// current_transaction  Objeto com os dados da ultima transação realizada pela assinatura
+// postback_url         Endpoint da aplicação integrada ao Pagar.me que irá receber os jsons de resposta a
+// 			cada atualização dos processos
+//
+// payment_method       Método de pagamento associado a essa assinatura
+// current_period_start Início do periodo de cobrança da assinatura
+// current_period_end   Término do periodo de cobrança da assinatura
+// charges              Numero de cobranças que foram efetuadas na assinatura, sem contar a cobrança inicial da
+// 	                assinatura no caso de cartão de crédito.
+//
+// status               Possíveis estados da transaçãov ou assinatura. Valores possíveis: trialing, paid,
+//                      pending_payment, unpaid, canceled e ended
+//
+// date_created         Data de criação da assinatura
+// phone                Objeto com dados do telefone do cliente
+// address              Objeto com dados do endereço do cliente
+// custormer            Objeto com dados do cliente
+// card                 Objeto com dados do cartão do cliente
+// metadata             Objeto com dados adicionais do cliente ou produto ou serviço vendido
 type Subscription struct {
-	Object 		   string                  `json:"object"`               // Nome do tipo de objeto criado ou
-								                 // modificado. Valor retornado: subscription
-
-	Plan 		   plan.Plan               `json:"plan"`                 // Objeto com os dados do plano que a
-										 // assinatura está associada
-
-	Id 		   int                     `json:"id"`                   // Número do identificador do plano
-	CurrentTransaction transaction.Transaction `json:"current_transaction"`  // Objeto com os dados da ultima
-							                         // transação realizada pela assinatura
-
-	PostbackUrl        string                  `json:"postback_url"`         // Endpoint da aplicação integrada ao
-								                 // Pagar.me que irá receber os jsons de
-                                                                                 // resposta a cada atualização dos processos
-
-	PaymentMethod      string                  `json:"payment_method"`       // Método de pagamento associado a
-                                                                                 // essa assinatura
-
-	CurrentPeriodStart string                  `json:"current_period_start"` // Início do periodo de cobrança da assinatura
-	CurrentPeriodEnd   string                  `json:"current_period_end"`   // Término do periodo de cobrança da assinatura
-	Charges            int                     `json:"charges"`              // Numero de cobranças que foram
-                                                                                 // efetuadas na assinatura, sem contar
-                                                                                 // a cobrança inicial da assinatura no
-                                                                                 // caso de cartão de crédito.
-
-	Status 	           string                  `json:"status"`               // Possíveis estados da transaçãov ou
-                                                                                 // assinatura. Valores possíveis: trialing,
-                                                                                 // paid, pending_payment,  unpaid,
-                                                                                 // canceled e ended
-
-	DateCreated 	   time.Time               `json:"date_created"`         // Data de criação da assinatura
-	Phone 		   customer.Phones         `json:"phone"`                // Objeto com dados do telefone do cliente
-	Address 	   customer.Addresses      `json:"address"`              // Objeto com dados do endereço do cliente
-	Custormer 	   customer.Customer       `json:"custormer"`            // Objeto com dados do cliente
-	Card 		   card.Card               `json:"card"`                 // Objeto com dados do cartão do cliente
-	Metadata 	   Metadata                `json:"metadata"`             // Objeto com dados adicionais do
-                                                                                 // cliente ou produto ou serviço vendido
+	Object             string                  `json:"object"`
+	Plan               plan.Plan               `json:"plan"`
+	Id                 int                     `json:"id"`
+	CurrentTransaction transaction.Transaction `json:"current_transaction"`
+	PostbackUrl        string                  `json:"postback_url"`
+	PaymentMethod      string                  `json:"payment_method"`
+	CurrentPeriodStart string                  `json:"current_period_start"`
+	CurrentPeriodEnd   string                  `json:"current_period_end"`
+	Charges            int                     `json:"charges"`
+	Status             string                  `json:"status"`
+	DateCreated        time.Time               `json:"date_created"`
+	Phone              customer.Phones         `json:"phone"`
+	Address            customer.Addresses      `json:"address"`
+	Custormer          customer.Customer       `json:"custormer"`
+	Card               card.Card               `json:"card"`
+	Metadata           Metadata                `json:"metadata"`
 }
 
-type Metadata struct {
-
-}
+type Metadata struct{}
 
 func (s *Subscription) Cancel(p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/cancel"

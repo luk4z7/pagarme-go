@@ -6,10 +6,10 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/collectpayment"
+	"net/url"
+	"os"
 )
 
 var transactionCollectPayment collectpayment.CollectPayment

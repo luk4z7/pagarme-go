@@ -1,10 +1,10 @@
 package auth
 
 import (
-	"testing"
-	_ "net/http/httptest"
-	_ "net/http"
 	"net/http"
+	_ "net/http"
+	_ "net/http/httptest"
+	"testing"
 )
 
 func TestBasicAuth(t *testing.T) {
@@ -20,8 +20,8 @@ func TestBasicAuth(t *testing.T) {
 
 func TestInit(t *testing.T) {
 	resp := Init("https://google.com", Headers{
-		"page"  : "1",
-		"count" : "10",
+		"page":  "1",
+		"count": "10",
 	})
 	_, err := requireInMethodInitReturn(resp)
 	if err != nil {
@@ -37,6 +37,6 @@ func requireInMethodInitReturn(d *http.Response) (*http.Response, error) {
 	return d, nil
 }
 
-func requireInMethodBasicAuthReturn(s string) (error) {
+func requireInMethodBasicAuthReturn(s string) error {
 	return nil
 }

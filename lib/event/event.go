@@ -5,11 +5,11 @@
 package event
 
 type Event struct {
-	Id      string    `json:"id"`       // Id do evento
-	Model   string    `json:"model"`    // Objeto associado a esse evento
-	ModelId string    `json:"model_id"` // Id do objeto associado a esse evento
-	Name    string    `json:"name"`     // Nome do evento
-	Object  string    `json:"object"`   // Nome do tipo do objeto criado/modificado
+	Id      string  `json:"id"`       // Id do evento
+	Model   string  `json:"model"`    // Objeto associado a esse evento
+	ModelId string  `json:"model_id"` // Id do objeto associado a esse evento
+	Name    string  `json:"name"`     // Nome do evento
+	Object  string  `json:"object"`   // Nome do tipo do objeto criado/modificado
 	Payload Payload `json:"payload"`  // Objeto com status dos eventos
 }
 

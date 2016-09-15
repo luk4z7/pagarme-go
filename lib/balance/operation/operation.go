@@ -5,11 +5,11 @@
 package operation
 
 import (
-	"time"
-	"net/url"
-	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/auth"
+	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryBalance repository.Repository
@@ -18,37 +18,58 @@ const (
 	endPoint = "https://api.pagar.me/1/balance/operations"
 )
 
+// amount          Valor em centavos transacionado para a conta
+// date_created    Data de criação da operação de saldo no formato ISODate
+// fee             Valor em centavos que foi cobrado pela transação (taxa)
+// id              Id da operação de saldo
+// movement_object Objeto da origem da operação de saldo
+// object          Nome do tipo do objeto criado/modificado
+// status          Estado do saldo da conta. Valores possíveis: waiting_funds, available e transferred
+// type            Tipo de objeto que gerou a operação de saldo
 type BalanceOperation struct {
-	Amount 		int 		  `json:"amount"`	   // Valor em centavos transacionado para a conta
-	DateCreated 	time.Time 	  `json:"date_created"`    // Data de criação da operação de saldo no formato ISODate
-	Fee 		int 		  `json:"fee"`	 	   // Valor em centavos que foi cobrado pela transação (taxa)
-	Id 		int 		  `json:"id"`		   // Id da operação de saldo
-	BalanceMovement BalanceMovement   `json:"movement_object"` // Objeto da origem da operação de saldo
-	Object 		string 		  `json:"object"`	   // Nome do tipo do objeto criado/modificado
-	Status 		string 		  `json:"status"`	   // Estado do saldo da conta. Valores possíveis:
-	   							   // waiting_funds ,  available e  transferred
-	Type 		string 		  `json:"type"`		   // Tipo de objeto que gerou a operação de saldo
+	Amount          int             `json:"amount"`
+	DateCreated     time.Time       `json:"date_created"`
+	Fee             int             `json:"fee"`
+	Id              int             `json:"id"`
+	BalanceMovement BalanceMovement `json:"movement_object"`
+	Object          string          `json:"object"`
+	Status          string          `json:"status"`
+	Type            string          `json:"type"`
 }
 
+// amount                Valor em centados do que foi pago
+// anticipation_fee      Valor em centavos que foi cobrado pela antecipação (taxa)
+// bulk_anticipation_id
+// date_created          Data de criação da operação no formato ISODate
+// fee                   Valor em centavos que foi cobrado pela transação (taxa)
+// id                    Id do recebível
+// installment           Número da parcela
+// object                Nome do tipo do objeto criado/modificado
+// original_payment_date Dia e hora da primeira data de pagamento no formato ISODate
+// payment_date          Dia e hora do pagamento no formato ISODate
+// payment_method        Forma de pagamento usada
+// recipient_id          Id do recebedor ao qual esse recebível pertence
+// split_rule_id         Id da regra de split, se houver alguma
+// status                Estado atual do recebível. Valores possíveis: waiting_funds, paid e suspended
+// transaction_id        Id da transação desse recebível
+// type                  Tipo do recebível. Valores possíveis: credit, refund, chargeback e chargeback_refund
 type BalanceMovement struct {
-	Amount 		    int       `json:"amount"`		     // Valor em centados do que foi pago
-	AnticipationFee     int       `json:"anticipation_fee"`      // Valor em centavos que foi cobrado pela antecipação (taxa)
-	BulkAnticipationId  int       `json:"bulk_anticipation_id"`  //
-	DateCreated         time.Time `json:"date_created"`	     // Data de criação da operação no formato ISODate
-	Fee 		    int       `json:"fee"`		     // Valor em centavos que foi cobrado pela transação (taxa)
-	Id 		    int       `json:"id"`		     // Id do recebível
-	Installment 	    int       `json:"installment"`	     // Número da parcela
-	Object 		    string    `json:"object"` 		     // Nome do tipo do objeto criado/modificado
-	OriginalPaymentDate string    `json:"original_payment_date"` // Dia e hora da primeira data de pagamento no formato ISODate
-	PaymentDate 	    time.Time `json:"payment_date"`	     // Dia e hora do pagamento no formato ISODate
-	PaymentMethod	    string    `json:"payment_method"`	     // Forma de pagamento usada
-	RecipientId	    string    `json:"recipient_id"`          // Id do recebedor ao qual esse recebível pertence
-	SplitRuleId 	    string    `json:"split_rule_id"`	     // Id da regra de split, se houver alguma
-	Status 		    string    `json:"status"`		     // Estado atual do recebível. Valores possíveis:
-								     // waiting_funds ,  paid e  suspended
-	TransactionId 	    int       `json:"transaction_id"`	     // Id da transação desse recebível
-	Type 		    string    `json:"type"`		     // Tipo do recebível. Valores possíveis:
-	  							     // credit , refund ,  chargeback e  chargeback_refund
+	Amount              int       `json:"amount"`
+	AnticipationFee     int       `json:"anticipation_fee"`
+	BulkAnticipationId  int       `json:"bulk_anticipation_id"`
+	DateCreated         time.Time `json:"date_created"`
+	Fee                 int       `json:"fee"`
+	Id                  int       `json:"id"`
+	Installment         int       `json:"installment"`
+	Object              string    `json:"object"`
+	OriginalPaymentDate string    `json:"original_payment_date"`
+	PaymentDate         time.Time `json:"payment_date"`
+	PaymentMethod       string    `json:"payment_method"`
+	RecipientId         string    `json:"recipient_id"`
+	SplitRuleId         string    `json:"split_rule_id"`
+	Status              string    `json:"status"`
+	TransactionId       int       `json:"transaction_id"`
+	Type                string    `json:"type"`
 }
 
 func (s *BalanceOperation) Get(p url.Values, h auth.Headers) (BalanceOperation, error, liberr.ErrorsAPI) {

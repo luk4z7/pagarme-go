@@ -6,17 +6,17 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/cardhashkey"
+	"net/url"
+	"os"
 )
 
 var transactionCardHashKey cardhashkey.CardHashKey
 
 func main() {
 	get, err, errorsApi := transactionCardHashKey.Get(url.Values{}, auth.Headers{
-		"encryption_key"  : "ek_test_XZUwx9tUMr0l2GL1H6XjIsnc8X5nYg",
+		"encryption_key": "ek_test_XZUwx9tUMr0l2GL1H6XjIsnc8X5nYg",
 	})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

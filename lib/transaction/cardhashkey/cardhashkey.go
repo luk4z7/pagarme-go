@@ -5,11 +5,11 @@
 package cardhashkey
 
 import (
-	"time"
-	"net/url"
-	"github.com/luk4z7/pagarme-go/repository"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryCardHashKey repository.Repository
@@ -20,8 +20,8 @@ const (
 
 type CardHashKey struct {
 	DateCreated time.Time `json:"date_created"`
-	Id 	    int       `json:"id"`
-	Ip	    string    `json:"ip"`
+	Id          int       `json:"id"`
+	Ip          string    `json:"ip"`
 	PublicKey   string    `json:"public_key"`
 }
 

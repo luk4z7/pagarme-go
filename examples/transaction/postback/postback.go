@@ -6,10 +6,10 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/postback"
+	"net/url"
+	"os"
 )
 
 var transactionPostback postback.TransactionPostback
@@ -17,7 +17,7 @@ var transactionPostback postback.TransactionPostback
 func main() {
 	get, err, errorsApi := transactionPostback.Get(url.Values{
 		"transaction_id": {"700975"},
-		"id": {"po_cissza9lk05h49r73lf4uww2z"},
+		"id":             {"po_cissza9lk05h49r73lf4uww2z"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -39,7 +39,7 @@ func main() {
 	// Reenviar um POSTback de uma transação
 	redeliver, err, errorsApi := transactionPostback.Redeliver(url.Values{
 		"transaction_id": {"700975"},
-		"id": {"po_cissza9lk05h49r73lf4uww2z"},
+		"id":             {"po_cissza9lk05h49r73lf4uww2z"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")

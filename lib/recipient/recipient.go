@@ -5,12 +5,12 @@
 package recipient
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/bank"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/lib/bank"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositoryRecipient repository.Repository
@@ -22,15 +22,15 @@ const (
 type Recipient struct {
 	AnticipatableVolumePercentage int          `json:"anticipatable_volume_percentage"`
 	AutomaticAnticipationEnabled  bool         `json:"automatic_anticipation_enabled"`
-	BankAccount 		      bank.Account `json:"bank_account"`
-	DateCreated 		      time.Time    `json:"date_created"`
-	DateUpdated 		      time.Time    `json:"date_updated"`
-	Id 			      string       `json:"id"`
-	LastTransfer 		      string       `json:"last_transfer"`
-	Object			      string       `json:"object"`
-	TransferDay 		      int          `json:"transfer_day"`
-	TransferEnabled 	      bool         `json:"transfer_enabled"`
-	TransferInnterval 	      string       `json:"transfer_interval"`
+	BankAccount                   bank.Account `json:"bank_account"`
+	DateCreated                   time.Time    `json:"date_created"`
+	DateUpdated                   time.Time    `json:"date_updated"`
+	Id                            string       `json:"id"`
+	LastTransfer                  string       `json:"last_transfer"`
+	Object                        string       `json:"object"`
+	TransferDay                   int          `json:"transfer_day"`
+	TransferEnabled               bool         `json:"transfer_enabled"`
+	TransferInnterval             string       `json:"transfer_interval"`
 }
 
 func (s *Recipient) Create(d []byte, p url.Values, h auth.Headers) (Recipient, error, liberr.ErrorsAPI) {

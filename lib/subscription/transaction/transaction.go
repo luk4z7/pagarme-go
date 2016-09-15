@@ -5,11 +5,11 @@
 package subscription
 
 import (
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/transaction"
 	liberr "github.com/luk4z7/pagarme-go/error"
+	"github.com/luk4z7/pagarme-go/lib/transaction"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
 )
 
 var repositorySubscription repository.Repository

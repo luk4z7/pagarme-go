@@ -5,11 +5,11 @@
 package splitrule
 
 import (
-	"time"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/repository"
+	"net/url"
+	"time"
 )
 
 var repositorySplitRule repository.Repository
@@ -19,16 +19,16 @@ const (
 )
 
 type SplitRule struct {
-	Object 		    string    `json:"object"`
-	Id     		    int       `json:"id"`
-	RecipientId 	    string    `json:"recipient_id"`
+	Object              string    `json:"object"`
+	Id                  int       `json:"id"`
+	RecipientId         string    `json:"recipient_id"`
 	ChargeProcessingFee bool      `json:"charge_processing_fee"`
-	Liable 		    bool      `json:"liable"`
-	Percentage 	    int       `json:"percentage"`
-	Amount 		    int       `json:"amount"`
-	DateCreated 	    time.Time `json:"date_created"`
-	DateUpdated 	    time.Time `json:"date_updated"`
-	Route		    string    `json:"route"`
+	Liable              bool      `json:"liable"`
+	Percentage          int       `json:"percentage"`
+	Amount              int       `json:"amount"`
+	DateCreated         time.Time `json:"date_created"`
+	DateUpdated         time.Time `json:"date_updated"`
+	Route               string    `json:"route"`
 }
 
 func (s *SplitRule) Get(p url.Values, h auth.Headers) (SplitRule, error, liberr.ErrorsAPI) {

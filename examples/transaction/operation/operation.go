@@ -6,10 +6,10 @@ package main
 
 import (
 	"encoding/json"
-	"os"
-	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
 	"github.com/luk4z7/pagarme-go/lib/transaction/operation"
+	"net/url"
+	"os"
 )
 
 var transactionOperation operation.TransactionOperation
@@ -17,7 +17,7 @@ var transactionOperation operation.TransactionOperation
 func main() {
 	get, err, errorsApi := transactionOperation.Get(url.Values{
 		"transaction_id": {"683688"},
-		"id": {"go_cioau9den01nr633s9hlg8t9y"},
+		"id":             {"go_cioau9den01nr633s9hlg8t9y"},
 	}, auth.Headers{})
 	if err != nil {
 		response, _ := json.MarshalIndent(errorsApi, "", "  ")
@@ -26,7 +26,6 @@ func main() {
 		responseGet, _ := json.MarshalIndent(get, "", " ")
 		os.Stdout.Write(responseGet)
 	}
-
 
 	getall, err, errorsApi := transactionOperation.GetAll(url.Values{"transaction_id": {"683688"}}, auth.Headers{})
 	if err != nil {
