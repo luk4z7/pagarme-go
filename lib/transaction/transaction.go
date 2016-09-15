@@ -119,7 +119,7 @@ type Transaction struct {
 }
 
 type Metadata struct {
-	idProduto string `json:"id_produto"`
+	IdProduto string `json:"id_produto"`
 }
 
 type AntifraudMetadata struct{}

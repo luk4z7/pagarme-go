@@ -18,8 +18,8 @@ const (
 )
 
 type Zipcode struct {
-	neighborhood string `json:"object"`  // Bairro
-	street       string `json:"street"`  // Rua
+	Neighborhood string `json:"object"`  // Bairro
+	Street       string `json:"street"`  // Rua
 	City         string `json:"city"`    // Cidade
 	State        string `json:"state"`   // Estado
 	Zipcode      string `json:"zipcode"` // Código postal (CEP)
