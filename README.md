@@ -1,5 +1,7 @@
 # pagarme-go
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/luk4z7/pagarme-go)](https://goreportcard.com/report/github.com/luk4z7/pagarme-go)
+
 ## Installation
 
 ```bash
