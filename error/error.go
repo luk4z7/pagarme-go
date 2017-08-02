@@ -27,7 +27,7 @@ func (e *Err) Error() string {
 // Return panic when error != nil
 func Check(e error, m string) {
 	if e != nil {
-		if m == "" {
+		if m != "" {
 			panic(m)
 		} else {
 			panic(e)
