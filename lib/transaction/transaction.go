@@ -5,14 +5,15 @@
 package transaction
 
 import (
+	"net/url"
+	"time"
+
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/card"
 	"github.com/luk4z7/pagarme-go/lib/customer"
 	"github.com/luk4z7/pagarme-go/lib/transaction/splitrule"
 	"github.com/luk4z7/pagarme-go/repository"
-	"net/url"
-	"time"
 )
 
 var repositoryTransaction repository.Repository
@@ -56,6 +57,7 @@ const (
 // card_last_digits
 // card_first_digits
 // card_brand
+// card_hash
 // postback_url	            URL para onde são enviadas as notificações de alteração de status
 // payment_method	    Método de pagamento possíveis: credit_card e boleto
 // capture_method
@@ -99,6 +101,7 @@ type Transaction struct {
 	CardLastDigits       string                `json:"card_last_digits"`
 	CardFirstDigits      string                `json:"card_first_digits"`
 	CardBrand            string                `json:"card_brand"`
+	CardHash             string                `json:"card_hash"`
 	PostbackUrl          string                `json:"postback_url"`
 	PaymentMethod        string                `json:"payment_method"`
 	CaptureMethod        string                `json:"capture_method"`
