@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package repository
+package request
 
 import (
 	"bytes"
@@ -19,10 +19,7 @@ var key config.ApiKey
 
 var errApi = liberr.ErrorsAPI{}
 
-// Repository is a object type for abstract methods for API
-// Get, Create, Getall, etc ...
-type Repository struct {
-}
+type Client struct{}
 
 // params expected data for route settings and access should be as follows:
 // 	_, err := repositoryCard.Get(url.Values{"route": {route}}, struct, headers)
@@ -37,7 +34,7 @@ type Repository struct {
 //   	Content-Type:  application/json
 // 	Authorization: Basic
 //
-func (r *Repository) Get(p url.Values, i interface{}, h auth.Headers) (interface{}, error, liberr.ErrorsAPI) {
+func (r *Client) Get(p url.Values, i interface{}, h auth.Headers) (interface{}, error, liberr.ErrorsAPI) {
 	// mount the route
 	resp := auth.Init(string(p.Get("route")), h)
 	// Read the response
@@ -58,13 +55,8 @@ func (r *Repository) Get(p url.Values, i interface{}, h auth.Headers) (interface
 
 // params and structure also works to the method described above
 // data expected []byte for create/update any services
-func (r *Repository) Create(p url.Values, d []byte, i interface{}) (interface{}, error, liberr.ErrorsAPI) {
-	req, err, errApi := request("POST", p.Get("route"), d, i)
-	return req, err, errApi
-}
-
-func (s *Repository) Update(p url.Values, d []byte, i interface{}) (interface{}, error, liberr.ErrorsAPI) {
-	req, err, errApi := request("PUT", p.Get("route"), d, i)
+func (r *Client) New(m string, p url.Values, d []byte, i interface{}) (interface{}, error, liberr.ErrorsAPI) {
+	req, err, errApi := request(m, p.Get("route"), d, i)
 	return req, err, errApi
 }
 

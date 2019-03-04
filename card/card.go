@@ -7,12 +7,10 @@ package card
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryCard repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/cards"
@@ -34,12 +32,14 @@ type Card struct {
 }
 
 func (s *Card) Create(d []byte, p url.Values, h auth.Headers) (Card, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryCard.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.New("POST", url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Card) Get(p url.Values, h auth.Headers) (Card, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryCard.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
