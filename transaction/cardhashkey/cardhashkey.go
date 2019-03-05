@@ -7,12 +7,10 @@ package cardhashkey
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryCardHashKey repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/transactions/card_hash_key"
@@ -26,6 +24,7 @@ type CardHashKey struct {
 }
 
 func (s *CardHashKey) Get(p url.Values, h auth.Headers) (CardHashKey, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryCardHashKey.Get(url.Values{"route": {endPoint}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, s, h)
 	return *s, err, errApi
 }

@@ -7,11 +7,9 @@ package search
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositorySearch repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/search"
@@ -45,6 +43,7 @@ type HitsInto struct {
 }
 
 func (s *Search) Get(p url.Values, h auth.Headers) (Search, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositorySearch.Get(url.Values{"route": {endPoint}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, s, h)
 	return *s, err, errApi
 }

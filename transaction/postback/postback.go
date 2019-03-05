@@ -8,11 +8,9 @@ import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/postback"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositoryPostback repository.Repository
 
 type TransactionPostback struct {
 	postback postback.Postback
@@ -24,19 +22,22 @@ const (
 
 func (s *TransactionPostback) Get(p url.Values, h auth.Headers) (postback.Postback, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/postbacks/" + p.Get("id")
-	_, err, errApi := repositoryPostback.Get(url.Values{"route": {route}}, &s.postback, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &s.postback, h)
 	return s.postback, err, errApi
 }
 
 func (s *TransactionPostback) GetAll(p url.Values, h auth.Headers) ([]postback.Postback, error, liberr.ErrorsAPI) {
 	res := []postback.Postback{}
 	route := endPoint + "/" + p.Get("transaction_id") + "/postbacks"
-	_, err, errApi := repositoryPostback.Get(url.Values{"route": {route}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &res, h)
 	return res, err, errApi
 }
 
 func (s *TransactionPostback) Redeliver(p url.Values, h auth.Headers) (postback.Postback, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/postbacks/" + p.Get("id") + "/redeliver"
-	_, err, errApi := repositoryPostback.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
 	return s.postback, err, errApi
 }

@@ -10,12 +10,10 @@ import (
 	"github.com/luk4z7/pagarme-go/lib/card"
 	"github.com/luk4z7/pagarme-go/lib/customer"
 	"github.com/luk4z7/pagarme-go/lib/transaction/splitrule"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryTransaction repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/transactions"
@@ -125,18 +123,21 @@ type Metadata struct {
 type AntifraudMetadata struct{}
 
 func (s *Transaction) Create(d []byte, p url.Values, h auth.Headers) (Transaction, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryTransaction.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Transaction) Get(p url.Values, h auth.Headers) (Transaction, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryTransaction.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Transaction) GetAll(p url.Values, h auth.Headers) ([]Transaction, error, liberr.ErrorsAPI) {
 	res := []Transaction{}
-	_, err, errApi := repositoryTransaction.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }

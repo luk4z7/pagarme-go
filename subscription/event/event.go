@@ -8,11 +8,9 @@ import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/event"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositorySubscriptionEvent repository.Repository
 
 type SubscriptionEvent struct {
 	event event.Event
@@ -24,13 +22,15 @@ const (
 
 func (s *SubscriptionEvent) Get(p url.Values, h auth.Headers) (event.Event, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("subscription_id") + "/events/" + p.Get("id")
-	_, err, errApi := repositorySubscriptionEvent.Get(url.Values{"route": {route}}, &s.event, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &s.event, h)
 	return s.event, err, errApi
 }
 
 func (s *SubscriptionEvent) GetAll(p url.Values, h auth.Headers) ([]event.Event, error, liberr.ErrorsAPI) {
 	res := []event.Event{}
 	route := endPoint + "/" + p.Get("subscription_id") + "/events"
-	_, err, errApi := repositorySubscriptionEvent.Get(url.Values{"route": {route}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &res, h)
 	return res, err, errApi
 }

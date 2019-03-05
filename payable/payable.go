@@ -7,12 +7,10 @@ package payable
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryRecipient repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/payables"
@@ -35,12 +33,14 @@ type Payable struct {
 
 func (s *Payable) Get(p url.Values, h auth.Headers) (Payable, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryRecipient.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Payable) GetAll(p url.Values, h auth.Headers) ([]Payable, error, liberr.ErrorsAPI) {
 	res := []Payable{}
-	_, err, errApi := repositoryRecipient.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }

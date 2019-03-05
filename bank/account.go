@@ -7,12 +7,10 @@ package bank
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryBank repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/bank_accounts"
@@ -33,18 +31,21 @@ type Account struct {
 }
 
 func (s *Account) Create(d []byte, p url.Values, h auth.Headers) (Account, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryBank.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Account) Get(p url.Values, h auth.Headers) (Account, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryBank.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Account) GetAll(p url.Values, h auth.Headers) ([]Account, error, liberr.ErrorsAPI) {
 	res := []Account{}
-	_, err, errApi := repositoryBank.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }

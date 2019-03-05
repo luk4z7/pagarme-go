@@ -7,12 +7,10 @@ package customer
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryCustomer repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/customers"
@@ -54,18 +52,21 @@ type Phones struct {
 }
 
 func (s *Customer) Create(d []byte, p url.Values, h auth.Headers) (Customer, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryCustomer.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Customer) Get(p url.Values, h auth.Headers) (Customer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryCustomer.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Customer) GetAll(p url.Values, h auth.Headers) ([]Customer, error, liberr.ErrorsAPI) {
 	res := []Customer{}
-	_, err, errApi := repositoryCustomer.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }

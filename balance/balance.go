@@ -7,11 +7,9 @@ package balance
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositoryBalance repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/balance"
@@ -29,6 +27,7 @@ type BalanceAmount struct {
 }
 
 func (s *BalanceAmount) GetAll(p url.Values, h auth.Headers) (BalanceAmount, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryBalance.Get(url.Values{"route": {endPoint}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, s, h)
 	return *s, err, errApi
 }

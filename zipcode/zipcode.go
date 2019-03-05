@@ -7,11 +7,9 @@ package zipcode
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositoryZipcode repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/zipcodes"
@@ -27,6 +25,7 @@ type Zipcode struct {
 
 func (s *Zipcode) Get(p url.Values, h auth.Headers) (Zipcode, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryZipcode.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }

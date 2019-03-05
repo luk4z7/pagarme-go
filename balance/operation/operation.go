@@ -7,12 +7,10 @@ package operation
 import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryBalance repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/balance/operations"
@@ -74,12 +72,14 @@ type BalanceMovement struct {
 
 func (s *BalanceOperation) Get(p url.Values, h auth.Headers) (BalanceOperation, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryBalance.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *BalanceOperation) GetAll(p url.Values, h auth.Headers) ([]*BalanceOperation, error, liberr.ErrorsAPI) {
 	res := []*BalanceOperation{}
-	_, err, errApi := repositoryBalance.Get(url.Values{"route": {endPoint}}, res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, res, h)
 	return res, err, errApi
 }

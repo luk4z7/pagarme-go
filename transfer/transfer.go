@@ -8,12 +8,10 @@ import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/bank"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositoryTransfer repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/transfers"
@@ -55,30 +53,35 @@ type Transfer struct {
 }
 
 func (s *Transfer) Create(d []byte, p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositoryTransfer.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Transfer) Get(p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryTransfer.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Transfer) GetAll(p url.Values, h auth.Headers) ([]Transfer, error, liberr.ErrorsAPI) {
 	res := []Transfer{}
-	_, err, errApi := repositoryTransfer.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }
 
 func (s *Transfer) Update(d []byte, p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositoryTransfer.Update(url.Values{"route": {route}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Update(url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Transfer) Cancel(p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/cancel"
-	_, err, errApi := repositoryTransfer.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
 	return *s, err, errApi
 }

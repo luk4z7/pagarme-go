@@ -8,11 +8,9 @@ import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/payable"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositoryPayable repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/transactions"
@@ -24,13 +22,15 @@ type TransactionPayable struct {
 
 func (s *TransactionPayable) Get(p url.Values, h auth.Headers) (payable.Payable, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/payables/" + p.Get("id")
-	_, err, errApi := repositoryPayable.Get(url.Values{"route": {route}}, &s.payable, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &s.payable, h)
 	return s.payable, err, errApi
 }
 
 func (s *TransactionPayable) GetAll(p url.Values, h auth.Headers) ([]payable.Payable, error, liberr.ErrorsAPI) {
 	res := []payable.Payable{}
 	route := endPoint + "/" + p.Get("transaction_id") + "/payables"
-	_, err, errApi := repositoryPayable.Get(url.Values{"route": {route}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &res, h)
 	return res, err, errApi
 }

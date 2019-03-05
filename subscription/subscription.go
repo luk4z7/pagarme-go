@@ -11,12 +11,10 @@ import (
 	"github.com/luk4z7/pagarme-go/lib/customer"
 	"github.com/luk4z7/pagarme-go/lib/plan"
 	"github.com/luk4z7/pagarme-go/lib/transaction"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 	"time"
 )
-
-var repositorySubscription repository.Repository
 
 const (
 	endPoint = "https://api.pagar.me/1/subscriptions"
@@ -67,29 +65,34 @@ type Metadata struct{}
 
 func (s *Subscription) Cancel(p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/cancel"
-	_, err, errApi := repositorySubscription.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
 	return *s, err, errApi
 }
 
 func (s *Subscription) Create(d []byte, p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
-	_, err, errApi := repositorySubscription.Create(url.Values{"route": {endPoint}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Subscription) Get(p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositorySubscription.Get(url.Values{"route": {route}}, s, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, s, h)
 	return *s, err, errApi
 }
 
 func (s *Subscription) GetAll(p url.Values, h auth.Headers) ([]Subscription, error, liberr.ErrorsAPI) {
 	res := []Subscription{}
-	_, err, errApi := repositorySubscription.Get(url.Values{"route": {endPoint}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {endPoint}}, &res, h)
 	return res, err, errApi
 }
 
 func (s *Subscription) Update(d []byte, p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
-	_, err, errApi := repositorySubscription.Update(url.Values{"route": {route}}, d, s)
+	req := request.Client{}
+	_, err, errApi := req.Update(url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }

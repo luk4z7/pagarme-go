@@ -8,11 +8,9 @@ import (
 	"github.com/luk4z7/pagarme-go/auth"
 	liberr "github.com/luk4z7/pagarme-go/error"
 	"github.com/luk4z7/pagarme-go/lib/transaction"
-	"github.com/luk4z7/pagarme-go/repository"
+	"github.com/luk4z7/pagarme-go/request"
 	"net/url"
 )
-
-var repositorySubscription repository.Repository
 
 type SubscriptionTransaction struct {
 	transaction transaction.Transaction
@@ -25,6 +23,7 @@ const (
 func (s *SubscriptionTransaction) Get(p url.Values, h auth.Headers) ([]transaction.Transaction, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/transactions"
 	res := []transaction.Transaction{}
-	_, err, errApi := repositorySubscription.Get(url.Values{"route": {route}}, &res, h)
+	req := request.Client{}
+	_, err, errApi := req.Get(url.Values{"route": {route}}, &res, h)
 	return res, err, errApi
 }
