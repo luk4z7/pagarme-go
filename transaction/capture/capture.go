@@ -23,6 +23,6 @@ type Capture struct {
 func (s *Capture) Create(d []byte, p url.Values, h auth.Headers) (transaction.Transaction, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/capture"
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {route}}, d, &s.capture)
+	_, err, errApi := req.New("POST", url.Values{"route": {route}}, d, &s.capture)
 	return s.capture, err, errApi
 }

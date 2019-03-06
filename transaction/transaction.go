@@ -124,7 +124,7 @@ type AntifraudMetadata struct{}
 
 func (s *Transaction) Create(d []byte, p url.Values, h auth.Headers) (Transaction, error, liberr.ErrorsAPI) {
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
+	_, err, errApi := req.New("POST", url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 

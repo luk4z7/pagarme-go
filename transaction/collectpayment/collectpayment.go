@@ -20,6 +20,6 @@ type CollectPayment struct{}
 func (s *CollectPayment) Create(d []byte, p url.Values, h auth.Headers) (CollectPayment, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/collect_payment"
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {route}}, d, s)
+	_, err, errApi := req.New("POST", url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }

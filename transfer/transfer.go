@@ -54,7 +54,7 @@ type Transfer struct {
 
 func (s *Transfer) Create(d []byte, p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
+	_, err, errApi := req.New("POST", url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
@@ -75,13 +75,13 @@ func (s *Transfer) GetAll(p url.Values, h auth.Headers) ([]Transfer, error, libe
 func (s *Transfer) Update(d []byte, p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
 	req := request.Client{}
-	_, err, errApi := req.Update(url.Values{"route": {route}}, d, s)
+	_, err, errApi := req.New("UPDATE", url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }
 
 func (s *Transfer) Cancel(p url.Values, h auth.Headers) (Transfer, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/cancel"
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	_, err, errApi := req.New("POST", url.Values{"route": {route}}, []byte(`{}`), s)
 	return *s, err, errApi
 }

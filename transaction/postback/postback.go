@@ -38,6 +38,6 @@ func (s *TransactionPostback) GetAll(p url.Values, h auth.Headers) ([]postback.P
 func (s *TransactionPostback) Redeliver(p url.Values, h auth.Headers) (postback.Postback, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("transaction_id") + "/postbacks/" + p.Get("id") + "/redeliver"
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	_, err, errApi := req.New("POST", url.Values{"route": {route}}, []byte(`{}`), s)
 	return s.postback, err, errApi
 }

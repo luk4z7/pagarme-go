@@ -41,7 +41,7 @@ type Plan struct {
 
 func (s *Plan) Create(d []byte, p url.Values, headers auth.Headers) (Plan, error, liberr.ErrorsAPI) {
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
+	_, err, errApi := req.New("POST", url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
@@ -62,6 +62,6 @@ func (s *Plan) GetAll(p url.Values, h auth.Headers) ([]Plan, error, liberr.Error
 func (s *Plan) Update(d []byte, p url.Values, h auth.Headers) (Plan, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
 	req := request.Client{}
-	_, err, errApi := req.Update(url.Values{"route": {route}}, d, s)
+	_, err, errApi := req.New("UPDATE", url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }

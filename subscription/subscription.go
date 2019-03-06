@@ -66,13 +66,13 @@ type Metadata struct{}
 func (s *Subscription) Cancel(p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id") + "/cancel"
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {route}}, []byte(`{}`), s)
+	_, err, errApi := req.New("POST", url.Values{"route": {route}}, []byte(`{}`), s)
 	return *s, err, errApi
 }
 
 func (s *Subscription) Create(d []byte, p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	req := request.Client{}
-	_, err, errApi := req.Create(url.Values{"route": {endPoint}}, d, s)
+	_, err, errApi := req.New("POST", url.Values{"route": {endPoint}}, d, s)
 	return *s, err, errApi
 }
 
@@ -93,6 +93,6 @@ func (s *Subscription) GetAll(p url.Values, h auth.Headers) ([]Subscription, err
 func (s *Subscription) Update(d []byte, p url.Values, h auth.Headers) (Subscription, error, liberr.ErrorsAPI) {
 	route := endPoint + "/" + p.Get("id")
 	req := request.Client{}
-	_, err, errApi := req.Update(url.Values{"route": {route}}, d, s)
+	_, err, errApi := req.New("UPDATE", url.Values{"route": {route}}, d, s)
 	return *s, err, errApi
 }
