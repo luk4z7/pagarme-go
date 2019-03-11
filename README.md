@@ -25,12 +25,11 @@ import (
 	"encoding/json"
 	"os"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/bank"
+	"github.com/luk4z7/pagarme-go/bank"
 )
 
-var bankAccount bank.Account
-
 func main() {
+	bankAccount := bank.Account{}
 	data := []byte(`{
 		"bank_code": "184",
 		"agencia": "0809",
@@ -79,12 +78,11 @@ import (
 	"encoding/json"
 	"os"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/card"
+	"github.com/luk4z7/pagarme-go/card"
 )
 
-var creditCard card.Card
-
 func main() {
+	creditCard := card.Card{}
 	data2 := []byte(`{
 		"card_number": "4242424242424242",
 		"card_holder_name": "Marcos Mendes Teste API Create",
@@ -131,12 +129,11 @@ import (
 	"os"
 	"net/url"
 	"github.com/luk4z7/pagarme-go/auth"
-	"github.com/luk4z7/pagarme-go/lib/transaction"
+	"github.com/luk4z7/pagarme-go/transaction"
 )
 
-var transactionRecord transaction.Transaction
-
 func main() {
+	transactionRecord := transaction.Transaction{}
 	data := []byte(`{
 		"amount": 100,
 		"card_id": "card_cisp3at4s00fowm6egw1kgit1",
